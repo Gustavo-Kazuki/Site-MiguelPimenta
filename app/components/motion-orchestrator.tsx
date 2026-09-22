@@ -10,13 +10,15 @@ export function MotionOrchestrator() {
 
     gsap.registerPlugin(ScrollTrigger);
     const context = gsap.context(() => {
-      const hero = gsap.timeline({ defaults: { ease: "power3.out" } });
-      hero
-        .from(".state-mark__one", { scale: 0.7, rotate: -12, opacity: 0, duration: 0.8 })
-        .from(".state-mark__two", { scale: 0.6, x: 80, opacity: 0, duration: 0.6 }, "<.1")
-        .from(".portrait-frame", { clipPath: "polygon(48% 48%, 52% 48%, 52% 52%, 48% 52%, 48% 48%)", y: 30, opacity: 0, duration: 0.95 }, "<.05")
-        .from(".hero-number span", { yPercent: 110, opacity: 0, stagger: 0.08, duration: 0.65 }, "<.2")
-        .from(".hero__copy > *", { y: 26, opacity: 0, stagger: 0.08, duration: 0.55 }, "<-.25");
+      if (document.querySelector(".hero")) {
+        const hero = gsap.timeline({ defaults: { ease: "power3.out" } });
+        hero
+          .from(".state-mark__one", { scale: 0.7, rotate: -12, opacity: 0, duration: 0.8 })
+          .from(".state-mark__two", { scale: 0.6, x: 80, opacity: 0, duration: 0.6 }, "<.1")
+          .from(".portrait-frame", { clipPath: "polygon(48% 48%, 52% 48%, 52% 52%, 48% 52%, 48% 48%)", y: 30, opacity: 0, duration: 0.95 }, "<.05")
+          .from(".hero-number span", { yPercent: 110, opacity: 0, stagger: 0.08, duration: 0.65 }, "<.2")
+          .from(".hero__copy > *", { y: 26, opacity: 0, stagger: 0.08, duration: 0.55 }, "<-.25");
+      }
 
       gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((element) => {
         gsap.from(element, {
